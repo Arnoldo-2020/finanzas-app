@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+
+  <header class="dashboard-header">
+
+    <h1>{{ 'home_title' | translate }}</h1>
+    <span class="subtitle">Reporte Mensual</span>
+  </header>
+
+  <div class="metrics-grid">
+    <div class="card chart-card">
+
+      <div class="card summary-card">
+      <h3>Total Ventas</h3>
+      <div class="big-number">
+        {{ totalRevenue | currency:'EUR':'symbol':'1.0-0' }}
+      </div>
+      </div>
+
+      <h3>Ingresos por Producto</h3>
+      <app-revenue-chart [metrics]="ventas"></app-revenue-chart>
+    </div>
+  </div>
+
+</div>

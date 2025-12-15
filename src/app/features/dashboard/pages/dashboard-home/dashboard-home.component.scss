@@ -1,0 +1,47 @@
+// Variables (SCSS nos deja guardar colores)
+$bg-color: #f5f7fa;
+$text-dark: #2c3e50;
+$card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: $bg-color;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    color: $text-dark;
+    margin: 0;
+  }
+
+  .subtitle {
+    color: lighten($text-dark, 40%);
+    font-size: 0.9rem;
+  }
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: $card-shadow;
+
+    h3 {
+      margin-top: 0;
+      color: #7f8c8d;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+}

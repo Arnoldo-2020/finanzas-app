@@ -1,0 +1,42 @@
+name: Angular CI
+
+# 1. DISPARADORES (Triggers)
+# ¿Cuándo debe activarse este robot?
+on:
+  push:
+    branches: [ "master", "develop" ] # Al hacer push a estas ramas
+  pull_request:
+    branches: [ "master", "develop" ] # Al abrir un Pull Request hacia estas ramas
+
+# 2. TRABAJOS (Jobs)
+# ¿Qué tareas debe realizar?
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Usamos una máquina virtual Linux fresca
+
+    steps:
+    # A. Descargar tu código del repositorio
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # B. Instalar Node.js (el motor)
+    - name: Configurar Node.js 🔧
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18' # Versión estable compatible con Angular 16+
+        cache: 'npm'      # Guarda caché para ir más rápido la próxima vez
+
+    # C. Instalar las librerías (node_modules)
+    - name: Instalar dependencias 📦
+      # 'npm ci' es como 'npm install' pero más estricto y limpio para servidores
+      run: npm ci
+
+    # D. Correr los Tests Unitarios
+    - name: Ejecutar Tests (Unit Testing)
+      # --no-watch: Para que no se quede esperando cambios
+      # --browsers=ChromeHeadless: Usa un navegador "invisible" (sin interfaz gráfica)
+      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+
+    # E. Construir la aplicación (Simulacro de Producción)
+    - name: Construir la aplicación (Build)
+      run: npm run build -- --configuration=production
